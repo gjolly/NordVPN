@@ -1,0 +1,24 @@
+#!/bin/bash
+
+contryCode="fr"
+serverDir=/etc/openvpn/ovpn_udp
+
+if [ $1 ]; then
+	contryCode=$1
+fi
+
+exp="$contryCode[0-9]\{1,3\}\..*"
+
+servers=($(ls "$serverDir" | grep $exp))
+nbServers=$(ls "$serverDir" | grep $exp | wc -l)
+
+if [ "$nbServers" -eq 0 ]; then
+	echo No server found for this contry code.
+	exit 1
+fi
+
+serverID=$((RANDOM%nbServers))
+server=${servers[$serverID]}
+echo "Connecting to $server..."
+
+openvpn --config "$serverDir/$server" --auth-user-pass /etc/openvpn/nordvpn.pass

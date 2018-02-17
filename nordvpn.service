@@ -1,0 +1,13 @@
+[Unit]
+Description=Nordvpn service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/nordvpn
+Restart=on-abort
+
+
+[Install]
+WantedBy=multi-user.target
