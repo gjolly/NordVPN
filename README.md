@@ -16,6 +16,27 @@ This has been tested on a Debian system.
 ```bash
 git clone https://github.com/gjolly/NordVPN.git /tmp
 chmod +x /tmp/NordVPN/install.sh
-sudo /tmp/NordVPN/install.sh NORDVPN_USER NORDVPN_PASSWORD
+sudo /tmp/NordVPN/install.sh
+```
+
+Then enter your NordVPN credentials.
+
+Finally, you can remove the folder (optional):
+
+```bash
 rm -r /tmp/NordVPN
 ```
+
+
+
+## Uninstall
+
+```bash
+git clone https://github.com/gjolly/NordVPN.git /tmp
+chmod +x /tmp/NordVPN/uninstall.sh
+sudo /tmp/NordVPN/uninstall.sh
+rm -r /tmp/NordVPN
+```
+
+
+
