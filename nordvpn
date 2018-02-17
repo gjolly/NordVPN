@@ -1,12 +1,19 @@
 #!/bin/bash
 
+# Define default country code
 contryCode="fr"
+
+# Directory where are all the
+# nordvpn's configurationn files for openvpn
 serverDir=/etc/openvpn/ovpn_udp
 
+# If the user give a country code...
 if [ $1 ]; then
 	contryCode=$1
 fi
 
+# regex use to select all matching
+# configuration files
 exp="$contryCode[0-9]\{1,3\}\..*"
 
 servers=($(ls "$serverDir" | grep $exp))
@@ -17,8 +24,10 @@ if [ "$nbServers" -eq 0 ]; then
 	exit 1
 fi
 
+# The server is randomly choose
 serverID=$((RANDOM%nbServers))
 server=${servers[$serverID]}
 echo "Connecting to $server..."
 
+# Connection to the server
 openvpn --config "$serverDir/$server" --auth-user-pass /etc/openvpn/nordvpn.pass
